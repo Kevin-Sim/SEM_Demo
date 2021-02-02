@@ -1,5 +1,5 @@
 # SEM_Demo
-Week2 Build Status [![Build Status](https://travis-ci.com/Kevin-Sim/SEM_Demo.svg?branch=week2)](https://travis-ci.com/Kevin-Sim/SEM_Demo)
+Week3 Build Status [![Build Status](https://travis-ci.com/Kevin-Sim/SEM_Demo.svg?branch=week3)](https://travis-ci.com/Kevin-Sim/SEM_Demo)
 
 
 Create Bridge
