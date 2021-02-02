@@ -9,6 +9,7 @@ public class App
 {
     public static void main(String[] args)
     {
+		//Hello
         // Connect to MongoDB on local system - we're using port 27000 start container with -p 27000:27017
         // MongoClient mongoClient = new MongoClient("localhost", 27000);
         //Connect in a docker container
