@@ -42,4 +42,43 @@ Or if you have mysql on your own machine run image with exposed port -p 33060:33
 Get docker IP
 ``docker inspect --format '{{ .NetworkSettings.IPAddress }}' <container_id>``
 
- 
+ **Other Useful Commands**
+
+Copy File(s) from container
+
+``docker container cp <containerid>:<path to file> <local filename> or instead of a filename use - to output file to console``
+
+Export whole container as tar
+
+``docker container export <container id>  -o <filename.tgz>``
+
+Create Image from tar
+
+``docker image load -i filename.tgz``
+
+Need to test below ----- Mount a shared directory / volume The example below shared the contents of target with /tmp dir in docker
+
+``docker run -v ./target:/tmp``
+
+Or to mount from docker-compose
+```
+version: '3'
+services:
+  # Application Dockerfile is in same folder which is .
+  app:
+    build: .
+    volumes:
+      - target:/tmp
+
+  # db is is db folder
+  db:
+    build: db/.
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+    - "33060:3306"
+
+volumes:
+  target:
+
+```
