@@ -3,6 +3,7 @@ Week3 Build Status [![Build Status](https://travis-ci.com/Kevin-Sim/SEM_Demo.svg
 
 
 Change MavenMySQL  dependency to latest V8 from V5  
+Add <GroupId> to Maven assembly plugin
 Change docker-compose add the following at the end of the db build so we can access locally on port 33060
 ```
 ports:
