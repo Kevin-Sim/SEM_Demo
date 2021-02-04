@@ -42,3 +42,4 @@ Or if you have mysql on your own machine run image with exposed port -p 33060:33
 Get docker IP
 ``docker inspect --format '{{ .NetworkSettings.IPAddress }}' <container_id>``
 
+ 
