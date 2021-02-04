@@ -6,3 +6,5 @@ Create Bridge
 docker network create --driver bridge se-methods
 
 Use bridge put --network se-methods in run options when creating container
+
+Make sure to start mongo image with container name mongo-dbserver 
