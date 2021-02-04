@@ -25,10 +25,10 @@ public class App
             System.out.println("Connecting to database...");
             try
             {
-                // Wait a bit for db to start
-//                Thread.sleep(30000);
+                // Wait a bit for db to start needed for travis but could put in catch block
+                Thread.sleep(30000);
                 // Connect to database locally
-//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
+//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
