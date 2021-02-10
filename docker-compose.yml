@@ -3,8 +3,11 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
-    volumes:
-     - .\target:/tmp
+
+    # for debugging allows us to just repackage to get jar into docker app container
+    # Remove for travis
+    # volumes:
+    # - .\target:/tmp
 
   # db is is db folder
   db:
