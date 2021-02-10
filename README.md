@@ -3,7 +3,13 @@ Week3 Build Status [![Build Status](https://travis-ci.com/Kevin-Sim/SEM_Demo.svg
 
 
 Change MavenMySQL  dependency to latest V8 from V5  
-Add <GroupId> to Maven assembly plugin
+Change The single line for the Maven assembly plugin to the three lines below (solves problems for some students)
+```xml
+<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+```
+
 Change docker-compose add the following at the end of the db build so we can access locally on port 33060
 ```
 ports:
@@ -35,16 +41,12 @@ Run a SQL query
 
 ``Select count(*) FROM employees;`` 
 
-Or if you have mysql on your own machine run image with exposed port -p 33060:3306 and connect directly with?
-
-``mysql -h localhost -P 33060 --protocol=tcp -u root``
+**Other Useful Commands**
 
 Get docker IP
 ``docker inspect --format '{{ .NetworkSettings.IPAddress }}' <container_id>``
 
- **Other Useful Commands**
-
-Copy File(s) from container
+ Copy File(s) from container
 
 ``docker container cp <containerid>:<path to file> <local filename> or instead of a filename use - to output file to console``
 
@@ -54,11 +56,13 @@ Export whole container as tar
 
 Create Image from tar
 
-``docker image load -i filename.tgz``
+``docker image load -i filename.tgz``for debugging locally
 
-Need to test below ----- Mount a shared directory / volume The example below shared the contents of target with /tmp dir in docker
+Mount a shared directory / volume The example below shares the contents of target with /tmp dir in docker which allows us to repackage the jar without needing to rebuild the app container. We can then leave the db running and remove the delay from App  
 
-``docker run -v ./target:/tmp``
+**Remember to add the delay back into the app code so that it will work on travis**
+
+``docker run -v .\target:/tmp``
 
 Or to mount from docker-compose
 ```
@@ -68,7 +72,7 @@ services:
   app:
     build: .
     volumes:
-      - target:/tmp
+      - .\target:/tmp
 
   # db is is db folder
   db:
@@ -77,8 +81,5 @@ services:
     restart: always
     ports:
     - "33060:3306"
-
-volumes:
-  target:
 
 ```
