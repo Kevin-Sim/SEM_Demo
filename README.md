@@ -6,8 +6,8 @@ Change MavenMySQL  dependency to latest V8 from V5
 Change The single line for the Maven assembly plugin to the three lines below (solves problems for some students)
 ```xml
 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+<artifactId>maven-assembly-plugin</artifactId>
+<version>3.3.0</version>
 ```
 
 Change docker-compose add the following at the end of the db build so we can access locally on port 33060
@@ -60,7 +60,7 @@ Create Image from tar
 
 Mount a shared directory / volume The example below shares the contents of target with /tmp dir in docker which allows us to repackage the jar without needing to rebuild the app container. We can then leave the db running and remove the delay from App  
 
-**Remember to add the delay back into the app code so that it will work on travis**
+**Remember to remove the volume from docker-compose and add the delay back into the app code so that it will work on travis**
 
 ``docker run -v .\target:/tmp``
 
@@ -71,8 +71,11 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
+
+    # for debugging allows us to just repackage to get jar into docker app container
+    # Needs Removed for travis
     volumes:
-      - .\target:/tmp
+    - .\target:/tmp
 
   # db is is db folder
   db:
@@ -81,5 +84,4 @@ services:
     restart: always
     ports:
     - "33060:3306"
-
 ```
