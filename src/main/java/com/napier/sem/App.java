@@ -8,7 +8,7 @@ public class App
     {
         try
         {
-            // Load Database driver
+            // Load Database driver .
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
@@ -22,7 +22,7 @@ public class App
         int retries = 100;
         for (int i = 0; i < retries; ++i)
         {
-            System.out.println("Connecting to database...");
+            System.out.println("Connecting to database straight away..");
             try
             {
                 // Wait a bit for db to start needed for travis but could put in catch block
