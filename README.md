@@ -29,3 +29,15 @@ Remove all containers
 
 Remove submodule from commit
 `git rm --cached db/test_db`
+
+Create a container from an image make changes and commit to new image
+
+`docker run -it ubuntu`
+
+make changes
+
+commit to image
+
+`docker commit <container ID> <Image name>`
+
+Then restarting new image maintains changes
