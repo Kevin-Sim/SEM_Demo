@@ -11,7 +11,7 @@ public class App
         // Connect to database
         a.connect();
         // Get Employee
-        Employee emp = a.getEmployee(255530);
+        Employee emp = a.getEmployee(110567);
         // Display results
         a.displayEmployee(emp);
         // Disconnect from database
@@ -46,10 +46,10 @@ public class App
             try
             {
                 // Wait a bit for db to start needed for travis but can be removed locally if db running
-                Thread.sleep(30000);
+                Thread.sleep(0);
 
                 // Connect to database locally
-//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
+                //con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
                  con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
