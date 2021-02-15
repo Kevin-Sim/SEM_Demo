@@ -8,4 +8,4 @@ Added 8 Issues (SQL Queries)
 [Zube](https://zube.io/kevinsim/sem_demo/w/workspace-1/kanban)
 
 
-To Do create Salary By Dept
+To Do create Salary By Department
