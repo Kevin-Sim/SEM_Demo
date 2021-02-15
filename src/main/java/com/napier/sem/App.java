@@ -183,7 +183,7 @@ public class App {
 
         StringBuilder sb = new StringBuilder();
         for(Employee emp : employees){
-            displayEmployee(emp);
+//            displayEmployee(emp);
             sb.append(emp + "\r\n");
         }
         try {
@@ -194,6 +194,6 @@ public class App {
             e.printStackTrace();
         }
 
-        System.out.println("" + employees.size());
+        System.out.println("use docker container cp sem_demo_app_1:./tmp/Salaries.csv Salaries.csv to copy from container to file system");
     }
 }
