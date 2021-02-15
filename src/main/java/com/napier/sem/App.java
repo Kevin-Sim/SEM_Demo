@@ -193,7 +193,7 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("" + employees.size() + " records written to file");
         System.out.println("use docker container cp sem_demo_app_1:./tmp/Salaries.csv Salaries.csv to copy from container to file system");
     }
 }
