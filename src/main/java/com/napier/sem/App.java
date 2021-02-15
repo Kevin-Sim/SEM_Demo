@@ -1,6 +1,11 @@
 package com.napier.sem;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -12,6 +17,9 @@ public class App {
         Employee emp = a.getEmployee(255530);
         // Display results
         a.displayEmployee(emp);
+
+        System.out.println("\r\n\r\n-========Salary Report============--");
+        a.printSalaryReport();
         // Disconnect from database
         a.disconnect();
     }
@@ -41,7 +49,7 @@ public class App {
                 Thread.sleep(30000);
 
                 // Connect to database locally
-                //con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
+//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
@@ -115,6 +123,7 @@ public class App {
     }
 
 
+
     public void displayEmployee(Employee emp) {
         if (emp != null) {
             System.out.println(
@@ -126,5 +135,65 @@ public class App {
                             + emp.dept_name + "\n"
                             + "Manager: " + emp.manager + "\n");
         }
+    }
+
+
+    /**
+     * Issue 1 As an HR advisor I want to produce a report on the salary of all employees
+     * so that I can support financial reporting of the organisation
+     *
+     */
+    public  void printSalaryReport(){
+        ArrayList<Employee> employees = null;
+        try {
+            Statement stmt = con.createStatement();
+
+
+            String strSelect = "SELECT e1.emp_no, e1.first_name, e1.last_name, titles.title, salaries.salary, " +
+                    "dp1.dept_name " +
+                    "FROM employees e1 " +
+                    "JOIN titles ON titles.emp_no = e1.emp_no " +
+                    "JOIN dept_emp ON dept_emp.emp_no = e1.emp_no " +
+                    "JOIN departments dp1 ON dp1.dept_no = dept_emp.dept_no " +
+                    "JOIN salaries ON salaries.emp_no = e1.emp_no " +
+                    "WHERE salaries.to_date = '9999-1-1'" +
+                    "AND titles.to_date = '9999-1-1' AND dept_emp.to_date = '9999-1-1';";
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            while (rset.next()) {
+                if(employees == null){
+                    employees = new ArrayList<>();
+                }
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("emp_no");
+                emp.first_name = rset.getString("first_name");
+                emp.last_name = rset.getString("last_name");
+                emp.title = rset.getString("titles.title");
+                emp.salary = rset.getInt("salaries.salary");
+                emp.dept_name = rset.getString("dp1.dept_name");
+                employees.add(emp);
+            }
+        }catch(Exception e){
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get employee details");
+                return;
+        }
+
+
+        StringBuilder sb = new StringBuilder();
+        for(Employee emp : employees){
+            displayEmployee(emp);
+            sb.append(emp + "\r\n");
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Salaries.csv")));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("" + employees.size());
     }
 }
