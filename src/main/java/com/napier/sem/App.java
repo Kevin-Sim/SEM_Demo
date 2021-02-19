@@ -54,13 +54,13 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start needed for travis but can be removed locally if db running
-                Thread.sleep(0);
+                Thread.sleep(30000);
 
                 // Connect to database locally
-                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
+//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
-//                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected");
                 break;
@@ -68,6 +68,7 @@ public class App {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
+                // print
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -351,6 +352,12 @@ public class App {
      */
     public void printSalaries(ArrayList<Employee> employees)
     {
+        // Check employees is not null
+        if (employees == null)
+        {
+            System.out.println("No employees");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s %-8s %-15s" , "Emp No", "First Name", "Last Name", "Salary", "Title"));
         // Loop over all employees in the list
