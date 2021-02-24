@@ -19,8 +19,8 @@ public class AppTest
     }
 
     @Test
-    void printSalariesTestNull()
+    void getCitiesTest()
     {
-        app.getEmployee(1);
+        app.getCities();
     }
 }

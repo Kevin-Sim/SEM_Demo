@@ -13,6 +13,11 @@ public class App {
         App a = new App();
         // Connect to database
         a.connect();
+        ArrayList<City> cities = a.getCities();
+
+        for(City city : cities){
+            System.out.println(city);
+        }
         // Disconnect from database
         a.disconnect();
     }
@@ -39,13 +44,13 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start needed for travis but can be removed locally if db running
-                Thread.sleep(30000);
+                Thread.sleep(0);
 
                 // Connect to database locally
-//                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+//                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected");
                 break;
@@ -73,40 +78,32 @@ public class App {
         }
     }
 
-    public void getEmployee(int ID) {
+    public ArrayList<City> getCities() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
 
-            //could break this down into two SQL statements to retrieve employee details using joins
-            // then another query to get the manager
+            String strSelect = "SELECT * from city " ;
 
-            String strSelect = "SELECT e1.emp_no, e1.first_name, e1.last_name, titles.title, salaries.salary, " +
-                    "dp1.dept_name, e2.first_name as manager_firstname, e2.last_name as manager_lastname " +
-                    "FROM employees e1 JOIN titles ON titles.emp_no = e1.emp_no " +
-                    "JOIN dept_emp ON dept_emp.emp_no = e1.emp_no " +
-                    "JOIN departments dp1 ON dp1.dept_no = dept_emp.dept_no " +
-                    "JOIN dept_manager dm1 ON dm1.dept_no = dp1.dept_no " +
-                    "JOIN salaries ON salaries.emp_no = e1.emp_no JOIN employees e2 ON e2.emp_no IN " +
-                    "(SELECT dm2.emp_no FROM dept_manager dm2 WHERE dm2.dept_no = dp1.dept_no AND dm2.to_date = '9999-01-01') " +
-                    "WHERE dept_emp.emp_no = '" + ID + "' AND salaries.to_date = '9999-1-1' AND dm1.to_date = '9999-1-1' " +
-                    "AND titles.to_date = '9999-1-1' AND dept_emp.to_date = '9999-1-1';" ;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next()) {
-                int i = rset.getInt("emp_no");
-                String s  = rset.getString("first_name");
-                return;
-            } else {
-                return;
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.setId(rset.getInt("ID"));
+                city.setName(rset.getString("Name"));
+                city.setCountryCode(rset.getString("CountryCode"));
+                city.setDistrict(rset.getString("District"));
+                city.setPopulation(rset.getInt("Population"));
+                cities.add(city);
             }
+            return cities;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get employee details");
-            return;
+            return null;
         }
     }
 }
