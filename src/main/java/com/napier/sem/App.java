@@ -54,7 +54,7 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start needed for travis but can be removed locally if db running
-                Thread.sleep(0);
+                Thread.sleep(30000);
 
                 // Connect to database locally
 //                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=true", "root", "example");
