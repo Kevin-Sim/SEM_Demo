@@ -21,6 +21,7 @@ public class AppTest
     @Test
     void getCitiesTest()
     {
-        app.getCities();
+        ArrayList<City> cities = app.getCities();
+        //assert cities != null;
     }
 }

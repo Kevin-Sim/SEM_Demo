@@ -1,12 +1,14 @@
 package com.napier.sem;
 
+import java.lang.reflect.Field;
+
 public class Country {
     private String code;
     private String name;
     private String continent;
     private String region;
     private double surfaceArea;
-    private Integer indepYear;
+    private int indepYear;
     private int population;
     private double lifeExpectancy;
     private double gnp;
@@ -33,6 +35,10 @@ public class Country {
         this.headOfState = headOfState;
         this.capital = capital;
         this.code2 = code2;
+    }
+
+    public Country() {
+
     }
 
     public String getCode() {
@@ -75,11 +81,11 @@ public class Country {
         this.surfaceArea = surfaceArea;
     }
 
-    public Integer getIndepYear() {
+    public int getIndepYear() {
         return this.indepYear;
     }
 
-    public void setIndepYear(Integer indepYear) {
+    public void setIndepYear(int indepYear) {
         this.indepYear = indepYear;
     }
 
@@ -157,22 +163,16 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", continent='" + continent + '\'' +
-                ", region='" + region + '\'' +
-                ", surfaceArea=" + surfaceArea +
-                ", indepYear=" + indepYear +
-                ", population=" + population +
-                ", lifeExpectancy=" + lifeExpectancy +
-                ", gnp=" + gnp +
-                ", gnpOld=" + gnpOld +
-                ", localName='" + localName + '\'' +
-                ", governmentForm='" + governmentForm + '\'' +
-                ", headOfState='" + headOfState + '\'' +
-                ", capital=" + capital +
-                ", code2='" + code2 + '\'' +
-                '}';
+        String str = "|";
+        for (Field f : getClass().getDeclaredFields()){
+
+            try {
+                str += f.get(this) + " |";
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return str;
     }
 }

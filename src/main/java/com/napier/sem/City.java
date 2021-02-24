@@ -1,5 +1,7 @@
 package com.napier.sem;
 
+import java.lang.reflect.Field;
+
 public class City {
 
     private int id;
@@ -62,12 +64,16 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", district='" + district + '\'' +
-                ", population=" + population +
-                '}';
+        String str = "|";
+        for (Field f : getClass().getDeclaredFields()){
+
+            try {
+                str += f.get(this) + " |";
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return str;
     }
 }
