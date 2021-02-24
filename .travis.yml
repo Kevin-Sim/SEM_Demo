@@ -37,5 +37,5 @@ stages:
   - unit tests
   - integration tests
   - name: deploy
-    if: branch = week7
+    if: branch = week7World
 
