@@ -128,7 +128,8 @@ public class App {
                 }
             }
         });
-        printCountryReport(countries, "All the countries in the world organised by largest population to smallest", "report1.md");
+        printCountryReport(countries, "All the countries in the world organised by " +
+                "largest population to smallest", "./reports/report1.md");
     }
 
     /**
@@ -154,7 +155,7 @@ public class App {
             }
         });
         printCountryReport(countries1, "All the countries in a continent (" + continent +
-                ") organised by largest population to smallest", "report2_" + continent + ".md");
+                ") organised by largest population to smallest", "./reports/report2_" + continent + ".md");
     }
 
     /**
@@ -184,7 +185,7 @@ public class App {
             }
         });
         printCountryReport(countries1, "All the countries in a region (" + region +
-                ") organised by largest population to smallest", "report3_" + region.replace("/", "_") + ".md");
+                ") organised by largest population to smallest", "./reports/report3_" + region.replace("/", "_") + ".md");
     }
 
     /**
@@ -209,7 +210,7 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start needed for travis but can be removed locally if db running
-                Thread.sleep(30000);
+                Thread.sleep(0);
 
                 // Connect to database locally
 //                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
@@ -425,7 +426,7 @@ public class App {
         }
     }
     private static void outputReadme() {
-        File dir = new File(".");
+        File dir = new File("./reports/");
         File [] files = dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -434,7 +435,7 @@ public class App {
         });
         String str = "# Reports\r\n";
         for(File file : files){
-            str += "[" + file.getName() + "](<" + file.getName() + ">)  " + "\r\n";
+            str += "[" + file.getName() + "](<./reports/" + file.getName() + ">)  " + "\r\n";
         }
         BufferedWriter writer = null;
         try {
