@@ -1,10 +1,7 @@
 package com.napier.sem;
 
 import javax.swing.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,9 +102,14 @@ public class App {
         for(String region : a.regions){
             report3(countries, region);
         }
+
+
+        outputReadme();
         // Disconnect from database
         a.disconnect();
     }
+
+
 
     /**
      * All the countries in the world organised by largest population to smallest.
@@ -422,6 +424,26 @@ public class App {
             e.printStackTrace();
         }
     }
-
+    private static void outputReadme() {
+        File dir = new File(".");
+        File [] files = dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".md");
+            }
+        });
+        String str = "# Reports\r\n";
+        for(File file : files){
+            str += "[" + file.getName() + "](" + file.getName() + ")  " + "\r\n";
+        }
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(new File("./README.md")));
+            writer.write(str);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
