@@ -399,6 +399,7 @@ public class App {
             writer = new BufferedWriter(new FileWriter(new File(filename)));
             writer.write(sb.toString());
             writer.close();
+            System.out.println("Successfully output " + countries.size() + " results to " + filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
