@@ -28,18 +28,18 @@ jobs:
     - stage: integration tests
       jdk: oraclejdk11
       script: echo "Integration Tests"
-    - stage: deploy
+    - stage: release
       jdk: oraclejdk11
-      provider: pages:git
+      deploy:
+        provider: pages:git
         skip_cleanup: true
-        deploy_key: $GitHubPages_Deploy  # Set in the settings page of your repository, as a secure variable
+        github_token: $GitHubPages_Deploy  # Set in the settings page of your repository, as a secure variable
         keep_history: true
         on:
           branch: week7World
-
 stages:
-  - unit tests
-  - integration tests
-  - name: deploy
+  #- unit tests
+  #- integration tests
+  - name: release
     if: branch = week7World
 
