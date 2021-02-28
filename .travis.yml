@@ -31,7 +31,7 @@ jobs:
     - stage: release
       jdk: oraclejdk11
       deploy:
-        provider: pages:git
+        provider: pages
         skip_cleanup: true
         github_token: $GitHubPages_Deploy  # Set in the settings page of your repository, as a secure variable
         keep_history: true
