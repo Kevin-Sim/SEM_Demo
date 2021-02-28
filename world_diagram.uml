@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="480.0">com.napier.sem.Country</node>
+    <node x="85.5" y="0.0">com.napier.sem.City</node>
+    <node x="80.5" y="1158.0">com.napier.sem.CountryLanguage</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.napier.sem.CountryLanguage" target="com.napier.sem.Country">
+      <point x="-72.75" y="-171.0" />
+      <point x="104.75" y="1133.0" />
+      <point x="44.375" y="1133.0" />
+      <point x="-133.125" y="314.0" />
+    </edge>
+    <edge source="com.napier.sem.City" target="com.napier.sem.Country">
+      <point x="36.80000000000001" y="215.0" />
+      <point x="214.3" y="460.0" />
+      <point x="248.5" y="460.0" />
+      <point x="71.0" y="-314.0" />
+    </edge>
+    <edge source="com.napier.sem.Country" target="com.napier.sem.City">
+      <point x="-142.0" y="-314.0" />
+      <point x="35.5" y="450.0" />
+      <point x="103.9" y="450.0" />
+      <point x="-73.6" y="215.0" />
+    </edge>
+    <edge source="com.napier.sem.Country" target="com.napier.sem.CountryLanguage">
+      <point x="44.375" y="314.0" />
+      <point x="221.875" y="1133.0" />
+      <point x="201.75" y="1133.0" />
+      <point x="24.25" y="-171.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.34078947368421053" x="177.5" y="750.0" />
+  <SelectedNodes>
+    <node>com.napier.sem.Country</node>
+    <node>com.napier.sem.City</node>
+    <node>com.napier.sem.CountryLanguage</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
