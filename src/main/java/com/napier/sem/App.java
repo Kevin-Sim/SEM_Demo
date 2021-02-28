@@ -95,16 +95,16 @@ public class App {
 
         ArrayList<Country> countries = a.getCountries();
 
-        for(Country c : countries){
-            System.out.println(c);
+//        for(Country c : countries){
+//            System.out.println(c);
+//        }
+        report1(countries);
+        for(String continent : a.continents){
+            report2(countries, continent);
         }
-//        report1(countries);
-//        for(String continent : a.continents){
-//            report2(countries, continent);
-//        }
-//        for(String region : a.regions){
-//            report3(countries, region);
-//        }
+        for(String region : a.regions){
+            report3(countries, region);
+        }
         // Disconnect from database
         a.disconnect();
     }
