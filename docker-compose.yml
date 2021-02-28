@@ -3,6 +3,7 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
+    container_name: sem_demo_app
 
     # for debugging allows us to just repackage to get jar into docker app container
     # Needs Removed for travis
