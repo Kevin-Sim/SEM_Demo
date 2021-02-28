@@ -434,7 +434,7 @@ public class App {
         });
         String str = "# Reports\r\n";
         for(File file : files){
-            str += "[" + file.getName() + "](\"" + file.getName() + "\")  " + "\r\n";
+            str += "[" + file.getName() + "](<" + file.getName() + ">)  " + "\r\n";
         }
         BufferedWriter writer = null;
         try {
