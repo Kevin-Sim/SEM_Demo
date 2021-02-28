@@ -40,7 +40,7 @@ jobs:
         on:
           branch: week7World
       after_success:
-        - docker container cp app:*.md ./
+        - docker container cp sem_demo_app_1:./tmp ./
 stages:
   #- unit tests
   #- integration tests
