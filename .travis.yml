@@ -35,7 +35,7 @@ jobs:
         test: skip
         skip_cleanup: true
         github_token: $GitHubPages_Deploy  # Set in the settings page of your repository, as a secure variable
-        local_dir: ${TRAVIS_BUILD_DIR}
+        local_dir: ${TRAVIS_BUILD_DIR}/tmp
         keep_history: true
         on:
           branch: week7World
