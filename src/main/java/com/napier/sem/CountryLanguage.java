@@ -1,24 +1,20 @@
 package com.napier.sem;
 
-public class Countrylanguage {
-    private String countryCode;
+public class CountryLanguage {
+    private Country country;
     private String language;
     private String isOfficial;
     private double percentage;
 
-    public Countrylanguage(String countryCode, String language, String isOfficial, double percentage) {
-        this.countryCode = countryCode;
-        this.language = language;
-        this.isOfficial = isOfficial;
-        this.percentage = percentage;
+    public CountryLanguage() {
     }
 
-    public String getCountryCode() {
-        return this.countryCode;
+    public Country getCountry() {
+        return this.country;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public String getLanguage() {
@@ -47,8 +43,8 @@ public class Countrylanguage {
 
     @Override
     public String toString() {
-        return "Countrylanguage{" +
-                "countryCode='" + countryCode + '\'' +
+        return "CountryLanguage{" +
+                "country=" + country.getName() +
                 ", language='" + language + '\'' +
                 ", isOfficial='" + isOfficial + '\'' +
                 ", percentage=" + percentage +

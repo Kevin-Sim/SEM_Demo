@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,9 +20,9 @@ public class AppTest
     }
 
     @Test
-    void getCitiesTest()
+    void getCountriesTest()
     {
-        ArrayList<City> cities = app.getCities();
+        app.getCountries();
         //assert cities != null;
     }
 }
