@@ -30,9 +30,9 @@ jobs:
       script: echo "Integration Tests"
     - stage: deploy
       jdk: oraclejdk11
-      provider: pages
+      provider: pages:git
         skip_cleanup: true
-        github_token: $GitHub_Auth  # Set in the settings page of your repository, as a secure variable
+        deploy_key: $GitHubPages_Deploy  # Set in the settings page of your repository, as a secure variable
         keep_history: true
         on:
           branch: week7World
